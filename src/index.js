@@ -24,40 +24,89 @@ module.exports = function check(str, bracketsConfig) {
         if ( j === 0) {
           open.push(`${bracketsConfig[i][j]}`);
         } else {
-          close.push(`${bracketsConfig[i][j]}`);
-        }
+          close[bracketsConfig[i][j]] = open[open.length - 1];
+        } 
       }
     }
-    console.log (`Массив открытых скобок = ${open}`)
-    console.log (`Массив закрытых скобок = ${close}`);
-  }
+    for ( key in close) {
+      console.log (`Элемент ${key} = ${close[key]}`);
+    }
+    console.log (`Массив открытых скобок = ${open}`);
+   }
  
   openClosed(bracketsConfig);
 
     
   for (let z = 0; z <= str.length - 1; z++) {
-    if ( open.includes(str[z])) {
-      item = `${str[z]}`;
-      rezult.push(item);
-    } else {
-      if ( close.includes(str[z]) && rezult.length !== 0) {
-        rezult.pop()
+
+
+    if (str[z] !== rezult[rezult.length - 1]) {
+      if (open.includes(str[z])) {
+        item = `${str[z]}`;
+        rezult.push(item);
       } else {
-        rezultName = false;
-      }
-    }
-  }
+          if (rezult.length === 0) {
+            rezultName = false;
+            console.log (`Выходной массив = ${rezult}`);
+            console.log (rezultName); 
+           return rezultName;
+          }
+      
+          let endElement = rezult[rezult.length - 1];
   
+          console.log (`Текущий элемент - ${close[str[z]]}`);
+          console.log (`Его пара в массиве - ${close[str[z]]}`);
+          console.log (`"Элеммент для сравнения - ${endElement}`);
+  
+  
+  
+          if (endElement === close[str[z]]) {
+              rezult.pop();
+  
+            } else {
+              rezultName = false;
+              console.log (`Выходной массив = ${rezult}`);
+              console.log (rezultName); 
+               return rezultName;
+              }  
+        }
+
+
+
+
+
+    } else {
+      return rezultName = true;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+  }
+        
 
 
   console.log (`Выходной массив = ${rezult}`);
 
-  if (rezult.length === 0 || rezult.length % 2 === 0) {
+  
+
+  if (rezult.length === 0) {
     rezultName = true;
   } else {
     rezultName = false;
   }
 
+
+ console.log (rezultName); 
  return rezultName;
 }
 
