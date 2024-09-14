@@ -36,7 +36,6 @@ module.exports = function check(str, bracketsConfig) {
     
     openClosed(bracketsConfig, i);
     for (let z = 0; z <= str.length - 1; z++) {
-
       if (str[z] === open) {
         item = `${str[z]}`;
         rezult.push(item);
@@ -47,14 +46,13 @@ module.exports = function check(str, bracketsConfig) {
           rezultName = false;
         }
       }
-
-
     }
   }
 
+
   console.log (`Выходной массив = ${rezult}`);
 
-  if (rezult.length === 0) {
+  if (rezult.length === 0 || rezult.length % 2 === 0) {
     rezultName = true;
   } else {
     rezultName = false;
